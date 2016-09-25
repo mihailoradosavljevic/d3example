@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+
+<head>
+<style type="text/css">
+
+<!-- * {
+
+}
+h1 {
+font-size: medium;
+font-style :  italic;
+background-color : black;
+color : white;
+
+}
+a {
+
+}
+p {
+font-family : arial;
+font-size: small;
+background-color : red;
+color : white;
+
+}
+-->
+</style>
+
+
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+
+</head>
+
+<h1>
+REZULTATI GLASANJA - Predsednicki izbori 2014. / 2015.
+</h1>
+<br/>
+<br/>
+<body>
+
+<script>
+var dataArray = [10,20,40,60,80,120];
+var width = 900;
+var height = 500;
+
+var widthScale = d3.scale.linear()
+					.domain([0,120])
+					.range([0, width]);
+					
+var colorScale = d3.scale.linear()
+					.domain([0,120])
+					.range(["white", "red"]);
+					
+	var axis = d3.svg.axis()
+				.ticks(10)
+				.scale(widthScale);
+				
+	var canvas = d3.select("body")
+		.append("svg")
+		.attr("width", width)
+		.attr("height", height);
+		
+		
+		
+
+				
+		var bars = canvas.selectAll("rect")
+					.data(dataArray)
+					.enter()
+						.append("rect")
+						.attr("width", 0)
+						.transition().duration(3500).ease("linear")
+						.attr("width", function(d){ return widthScale(d);})
+						.attr("height", 20)
+						.attr("x", 50)
+						.attr("y", function (d,i) { return i*50;})
+						.attr("fill", "silver")
+						.transition()
+						.duration(500)
+						.attr("fill", function(d) {return colorScale(d);});
+						
+
+		canvas.append("g")
+				.attr("transform","translate(20,320)")
+				.attr("fill","gray")
+				.call(axis);
+						
+						
+			
+</script>
+
+
+
+</body>
+
+
+
+<p>
+
+Rezultati su izvedeni nakon istrazivanja agencija i udruge GONG - nezvanicni podaci
+
+</p>
+</html>
